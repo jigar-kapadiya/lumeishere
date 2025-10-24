@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 export function useVerify() {
     return useMutation({
         mutationFn: ({ userId, otp }: { userId: string, otp: string }) => {
-            return axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/users/verify/${userId}`, {
+            return axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/users/${userId}/verify`, {
                 otp
             })
         }, 

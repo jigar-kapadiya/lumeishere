@@ -15,7 +15,7 @@ export class UsersController implements IController {
 
     initializeRoutes() {
         this.router.post(`${this.path}/signup`, (req: Request, res: Response) => this.signUp(req, res).catch());
-        this.router.post(`${this.path}/verify/:id`, (req: Request, res: Response) => this.verify(req, res).catch());
+        this.router.post(`${this.path}/:id/verify`, (req: Request, res: Response) => this.verify(req, res).catch());
     }
 
     async signUp(req: Request, res: Response) {
