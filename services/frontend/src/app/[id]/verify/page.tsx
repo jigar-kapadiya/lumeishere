@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useVerify } from "@/query/verify";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function VerifyPage() {
     const { id } = useParams();
@@ -14,6 +15,13 @@ export default function VerifyPage() {
         console.log(id, code);
         verify.mutate({
             userId: id?.toString()!, otp: code
+        }, {
+            onSuccess: () => {
+                toast.success("User verified successfully");
+            },
+            onError: () => {
+                toast.error("Unable to verify user");
+            },
         })
     }
 

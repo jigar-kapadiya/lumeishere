@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { SignUpResponse, useSignup } from "@/query/signup";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function SignUp() {
     const [email, setEmail] = useState<string>("");
@@ -13,15 +14,18 @@ export function SignUp() {
     const router = useRouter();
 
     const handleSubmit = () => {
-        console.log(email, password);
         singUp.mutate({
             email, password
         },
             {
                 onSuccess: (res: AxiosResponse<SignUpResponse>) => {
+                    toast.success("User added successfully");
                     const id = res.data.data.userId;
                     router.push(`${id}/verify`)
-                }
+                },
+                onError: () => {
+                    toast.error("Unable to add user");
+                },
             }
 
         )
